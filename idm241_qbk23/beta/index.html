@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Beta microinteractions: Pinterest Board button, board picker and Save button.">
+    <title>Beta Microinteractions: Pinterest Save to Board</title>
+  </head>
+
+  <body>
+    <header>
+      <h1>Quinn Kessler</h1>
+      <p>IDM 241 &middot; Beta Microinteractions</p>
+      <hr>
+    </header>
+
+    <main>
+
+      <section id="url">
+        <h2>URL</h2>
+        <p><a href="https://www.pinterest.com/" target="_blank">https://www.pinterest.com/</a></p>
+      </section>
+
+      <section id="objects">
+        <h2>Objects: Board Button, Board Row, Save Button</h2>
+        <p>The Beta builds on my Alpha (the Save button) by adding the Board button and the "Save" board picker window, so the user can choose which board a pin is saved to.</p>
+        <p>How to find them: log in to Pinterest, stay on the Home feed, and move the mouse over any pin. The Board button (board name and down arrow) appears in the top-left corner and the red Save button appears in the top-right corner. Clicking the Board button opens the board picker, which lists a Board Row for each board.</p>
+        <hr>
+      </section>
+
+      <section id="triggers">
+        <h2>TRIGGERS:</h2>
+        <ul>
+          <li><b>Board Button</b>
+            <ul>
+              <li>Hover ON</li>
+              <li>Hover OFF</li>
+              <li>Click ON</li>
+              <li>Click OFF (Esc key or click outside the window)</li>
+            </ul>
+          </li>
+          <li><b>Board Row</b>
+            <ul>
+              <li>Hover ON</li>
+              <li>Hover OFF</li>
+              <li>Click ON (row's Save button)</li>
+            </ul>
+          </li>
+          <li><b>Save Button</b>
+            <ul>
+              <li>Hover ON</li>
+              <li>Hover OFF</li>
+              <li>Click ON</li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+      </section>
+
+      <section id="rules">
+        <h2>RULES:</h2>
+        <ul>
+          <li><b>Board Button:</b>
+            <ul>
+              <li>Hover ON
+                <ul>
+                  <li>Cursor changes to Finger</li>
+                  <li>Dark gray rounded background appears behind the board name and down arrow</li>
+                </ul>
+              </li>
+              <li>Hover OFF
+                <ul>
+                  <li>Cursor changes back to default</li>
+                  <li>Dark gray background disappears</li>
+                </ul>
+              </li>
+              <li>Click ON
+                <ul>
+                  <li>"Save" board picker window opens below the Board button
+                    <ul>
+                      <li>Title "Save" at the top</li>
+                      <li>Search bar, with the text cursor blinking in it</li>
+                      <li>"Top choices" list of recent boards</li>
+                      <li>"All boards" list that scrolls</li>
+                      <li>"Create board" button at the bottom</li>
+                    </ul>
+                  </li>
+                  <li>Board button stays dark gray while the window is open</li>
+                </ul>
+              </li>
+              <li>Click OFF
+                <ul>
+                  <li>Board picker window closes</li>
+                  <li>Board button goes back to normal</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><b>Board Row:</b>
+            <ul>
+              <li>Hover ON
+                <ul>
+                  <li>Cursor changes to Finger</li>
+                  <li>Row background turns light gray</li>
+                  <li>Red "Save" button appears on the right side of the row</li>
+                </ul>
+              </li>
+              <li>Hover OFF
+                <ul>
+                  <li>Cursor changes back to default</li>
+                  <li>Light gray background disappears</li>
+                  <li>Row's "Save" button disappears</li>
+                </ul>
+              </li>
+              <li>Click ON
+                <ul>
+                  <li>Pin is saved to that board</li>
+                  <li>Database updated with the pin added to that board</li>
+                  <li>Board picker window closes</li>
+                  <li>Board button text changes to that board's name</li>
+                  <li>Pin's Save button changes from RED to BLACK</li>
+                  <li>Pin's Save button text "Save" changes to "Saved"</li>
+                  <li>Down arrow on the Board button disappears</li>
+                  <li>Board name becomes an underlined link to the board</li>
+                  <li>That board becomes the default board for the next save</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><b>Save Button:</b>
+            <ul>
+              <li>Hover ON
+                <ul>
+                  <li>Cursor changes to Finger</li>
+                  <li>Button turns a darker red</li>
+                </ul>
+              </li>
+              <li>Hover OFF
+                <ul>
+                  <li>Cursor changes back to default</li>
+                  <li>Button goes back to normal red</li>
+                </ul>
+              </li>
+              <li>Click ON
+                <ul>
+                  <li>Pin is saved to the board shown on the Board button</li>
+                  <li>Database updated with the pin added to that board</li>
+                  <li>Button background changes from RED to BLACK</li>
+                  <li>Button text "Save" changes to "Saved"</li>
+                  <li>Down arrow on the Board button disappears</li>
+                  <li>Board name becomes an underlined link to the board</li>
+                  <li>That board stays the default board for the next save</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+      </section>
+
+      <section id="feedback">
+        <h2>FEEDBACK:</h2>
+        <ul>
+          <li><b>Board Button:</b>
+            <ul>
+              <li>Hover ON
+                <ul>
+                  <li>Cursor changes to Finger</li>
+                  <li>Dark gray rounded background appears behind the board name and down arrow</li>
+                </ul>
+              </li>
+              <li>Hover OFF
+                <ul>
+                  <li>Cursor changes back to default</li>
+                  <li>Dark gray background disappears</li>
+                </ul>
+              </li>
+              <li>Click ON
+                <ul>
+                  <li>"Save" board picker window opens below the Board button
+                    <ul>
+                      <li>Title "Save" at the top</li>
+                      <li>Search bar, with the text cursor blinking in it</li>
+                      <li>"Top choices" list of recent boards</li>
+                      <li>"All boards" list that scrolls</li>
+                      <li>"Create board" button at the bottom</li>
+                    </ul>
+                  </li>
+                  <li>Board button stays dark gray while the window is open</li>
+                </ul>
+              </li>
+              <li>Click OFF
+                <ul>
+                  <li>Board picker window closes</li>
+                  <li>Board button goes back to normal</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><b>Board Row:</b>
+            <ul>
+              <li>Hover ON
+                <ul>
+                  <li>Cursor changes to Finger</li>
+                  <li>Row background turns light gray</li>
+                  <li>Red "Save" button appears on the right side of the row</li>
+                </ul>
+              </li>
+              <li>Hover OFF
+                <ul>
+                  <li>Cursor changes back to default</li>
+                  <li>Light gray background disappears</li>
+                  <li>Row's "Save" button disappears</li>
+                </ul>
+              </li>
+              <li>Click ON
+                <ul>
+                  <li>Board picker window closes</li>
+                  <li>Board button text changes to that board's name</li>
+                  <li>Pin's Save button changes from RED to BLACK</li>
+                  <li>Pin's Save button text "Save" changes to "Saved"</li>
+                  <li>Down arrow on the Board button disappears</li>
+                  <li>Board name becomes an underlined link to the board</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><b>Save Button:</b>
+            <ul>
+              <li>Hover ON
+                <ul>
+                  <li>Cursor changes to Finger</li>
+                  <li>Button turns a darker red</li>
+                </ul>
+              </li>
+              <li>Hover OFF
+                <ul>
+                  <li>Cursor changes back to default</li>
+                  <li>Button goes back to normal red</li>
+                </ul>
+              </li>
+              <li>Click ON
+                <ul>
+                  <li>Button background changes from RED to BLACK</li>
+                  <li>Button text "Save" changes to "Saved"</li>
+                  <li>Down arrow on the Board button disappears</li>
+                  <li>Board name becomes an underlined link to the board</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+      </section>
+
+      <section id="loops">
+        <h2>LOOPS &amp; MODES:</h2>
+        <p>NA</p>
+        <hr>
+      </section>
+
+      <section id="visuals">
+        <h2>VISUALS:</h2>
+        <p>Screenshots taken from Pinterest. Black arrow = cursor position. Yellow rings = click.</p>
+
+        <h3>Board Button and Board Row</h3>
+        <table cellpadding="6" cellspacing="0" width="100%">
+          <tr>
+            <td width="50%" valign="top" align="center">
+              <img src="images/beta1-pin-hover.png" width="100%" alt="Cursor hovering a pin. The Board button and red Save button appear at the top of the pin.">
+              <p><small>1. Pin hover: Board button and Save button appear</small></p>
+            </td>
+            <td width="50%" valign="top" align="center">
+              <img src="images/beta2-board-hover.png" width="100%" alt="Cursor on the Board button, which shows a dark gray rounded background.">
+              <p><small>2. Board Button: Hover ON</small></p>
+            </td>
+          </tr>
+        </table>
+
+        <table cellpadding="6" cellspacing="0" width="100%">
+          <tr>
+            <td width="33%" valign="top" align="center">
+              <img src="images/beta3-board-click.png" width="100%" alt="Board button clicked. The Save board picker window is open with a search bar, Top choices, All boards and Create board.">
+              <p><small>3. Board Button: Click ON (picker opens)</small></p>
+            </td>
+            <td width="33%" valign="top" align="center">
+              <img src="images/beta4-row-hover.png" width="100%" alt="Cursor hovering the Plugg row. The row turns light gray and a red Save button appears on the right.">
+              <p><small>4. Board Row: Hover ON</small></p>
+            </td>
+            <td width="33%" valign="top" align="center">
+              <img src="images/beta5-row-save-click.png" width="100%" alt="Cursor clicking the red Save button on the Plugg row.">
+              <p><small>5. Board Row: Click ON</small></p>
+            </td>
+          </tr>
+        </table>
+
+        <h3>Save Button</h3>
+        <table cellpadding="6" cellspacing="0" width="100%">
+          <tr>
+            <td width="33%" valign="top" align="center">
+              <img src="../alpha/images/step1-hover.png" width="100%" alt="Cursor resting over the red Save button in the top right corner of a pin.">
+              <p><small>6. Save Button: Hover ON</small></p>
+            </td>
+            <td width="33%" valign="top" align="center">
+              <img src="../alpha/images/step2-click.png" width="100%" alt="Cursor clicking the red Save button, shown with yellow click rings.">
+              <p><small>7. Save Button: Click ON</small></p>
+            </td>
+            <td width="33%" valign="top" align="center">
+              <img src="../alpha/images/step3-saved.png" width="100%" alt="Save button is now black and reads Saved. The board name Plugg is an underlined link.">
+              <p><small>8. Saved</small></p>
+            </td>
+          </tr>
+        </table>
+
+        <h3>Animations</h3>
+        <table cellpadding="6" cellspacing="0" width="100%">
+          <tr>
+            <td width="50%" valign="top" align="center">
+              <img src="images/beta-animation.gif" width="100%" alt="Animation: hover pin, hover Board button, click it to open the picker, hover the Plugg row, click its Save button.">
+              <p><small>Board Button and Board Row (loops)</small></p>
+            </td>
+            <td width="50%" valign="top" align="center">
+              <img src="../alpha/images/save-animation.gif" width="100%" alt="Animation: cursor moves up to the Save button, clicks, and the button changes to Saved.">
+              <p><small>Save Button (loops)</small></p>
+            </td>
+          </tr>
+        </table>
+      </section>
+
+    </main>
+  </body>
+</html>

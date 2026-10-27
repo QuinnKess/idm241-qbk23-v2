@@ -17,18 +17,29 @@ The click works with a hidden checkbox and a `<label>`: clicking Save checks the
 
 Original interaction: [pinterest.com](https://www.pinterest.com/). Log in, then hover any pin on the Home feed.
 
+## Beta: Save to a Board
+
+Write-up of the Beta "medium" microinteractions: the **Board button**, the **Board Row** in the "Save" board picker, and the **Save button**.
+
+- **Board button:** hover shows a dark gray background; click opens the "Save" board picker.
+- **Board Row:** hover turns the row light gray and shows a red Save button; click saves the pin to that board.
+- **Save button:** same as the Alpha (turns black and reads "Saved").
+
 ## Files
 
 ```
 idm241_qbk23/
-└── alpha/
-    ├── index.html        Alpha write-up with screenshots
-    ├── images/           Screenshots and GIF of the original interaction
-    └── build/
-        ├── build.html    Working Alpha Build page
-        ├── style.css     Styles and hover/click states
-        └── images/
-            └── pin.jpg   Pin image
+├── alpha/
+│   ├── index.html        Alpha write-up with screenshots
+│   ├── images/           Screenshots and GIF of the original interaction
+│   └── build/
+│       ├── build.html    Working Alpha Build page
+│       ├── style.css     Styles and hover/click states
+│       └── images/
+│           └── pin.jpg   Pin image
+└── beta/
+    ├── index.html        Beta write-up with screenshots
+    └── images/           Screenshots and GIF of the board picker
 ```
 
 ## View it
