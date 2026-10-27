@@ -1,0 +1,171 @@
+/* ===== Colors and fonts (same as the Alpha Build) ===== */
+:root {
+  --bg: #0e0e0e;
+  --text: #f2efe9;
+  --muted: #8a8780;
+  --line: #3a3936;
+  --red: #e60023;       /* Pinterest red */
+  --sans: "Inter Tight", system-ui, sans-serif;
+  --serif: "Instrument Serif", Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.5;
+}
+
+/* ===== Header ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+header h1,
+header p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/* ===== Page content ===== */
+main {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+section {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--line);
+}
+
+#url {
+  border-top: none;
+  padding-top: 0;
+}
+
+hr {
+  display: none; /* sections already have a border line */
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  margin: 2rem 0 0.75rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+p {
+  max-width: 44rem;
+}
+
+a {
+  color: var(--text);
+}
+
+a:hover {
+  color: var(--red);
+}
+
+/* ===== Nested lists (Triggers, Rules, Feedback) ===== */
+ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+li {
+  margin: 0.25rem 0;
+}
+
+li li {
+  color: #c9c6bf;
+}
+
+b {
+  font-weight: 700;
+  color: var(--text);
+}
+
+main > section > ul > li {
+  margin-bottom: 1rem;
+}
+
+/* ===== Visuals ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0.5rem;
+  vertical-align: top;
+  text-align: center;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+td small {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* Phones: stack the images one per row */
+@media (max-width: 640px) {
+  header {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  table,
+  tbody,
+  tr,
+  td {
+    display: block;
+    width: 100% !important;
+  }
+
+  td {
+    padding: 0.5rem 0 1.5rem;
+  }
+
+  td:empty {
+    display: none;
+  }
+}

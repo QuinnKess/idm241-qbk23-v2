@@ -39,6 +39,7 @@ idm241_qbk23/
 │           └── pin.jpg   Pin image
 └── beta/
     ├── index.html        Beta write-up with screenshots
+    ├── style.css         Beta page styles
     └── images/           Screenshots and GIF of the board picker
 ```
 
