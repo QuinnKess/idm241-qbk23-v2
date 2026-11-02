@@ -25,6 +25,17 @@ Write-up of the Beta "medium" microinteractions: the **Board button**, the **Boa
 - **Board Row:** hover turns the row light gray and shows a red Save button; click saves the pin to that board.
 - **Save button:** same as the Alpha (turns black and reads "Saved").
 
+## Beta Build: Save to a Board
+
+A working recreation of the image card's Board button, board picker window and Save button, built with HTML, CSS and a small amount of JavaScript.
+
+- **Board button:** hover fades in a dark rounded background; click slides the board picker window down from the top over 0.2 seconds.
+- **Board row:** hover turns the row light gray and fades in a Row Save button; click saves to that board.
+- **Save button:** hover turns it darker red; click turns it black and changes the text to "Saved".
+- **Search:** typing in the board picker's search bar filters the boards.
+
+Live: [idm241-qbk23.vercel.app/idm241_qbk23/beta/build/build.html](https://idm241-qbk23.vercel.app/idm241_qbk23/beta/build/build.html)
+
 ## Files
 
 ```
@@ -40,7 +51,12 @@ idm241_qbk23/
 └── beta/
     ├── index.html        Beta write-up with screenshots
     ├── style.css         Beta page styles
-    └── images/           Screenshots and GIF of the board picker
+    ├── images/           Screenshots and GIF of the board picker
+    └── build/
+        ├── build.html    Working Beta Build page
+        ├── style.css     Styles, hover/click states and timing
+        ├── script.js     Opens/closes the picker, saves, search
+        └── images/       Image card photo and board thumbnails
 ```
 
 ## View it
