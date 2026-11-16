@@ -31,8 +31,7 @@
                 <span class="board-name">Andys</span>
                 <span class="arrow" aria-hidden="true">&#9662;</span>
               </button>
-              <button type="button" class="save-btn">Save</button>
-              <span class="share" aria-hidden="true">&uarr;</span>
+              <button type="button" class="save-btn" aria-pressed="false">Save</button>
             </div>
           </div>
 
@@ -41,39 +40,45 @@
             <input class="picker-search" type="search" placeholder="Search" aria-label="Search boards">
             <div class="picker-list">
               <p class="picker-label">Top choices</p>
-            <div class="row" data-board="Andys">
-              <img src="images/board-andys.jpg" alt="">
-              <span class="row-name">Andys</span>
-              <button type="button" class="row-save" aria-label="Save to Andys">Save</button>
-            </div>
-            <div class="row" data-board="Plugg">
-              <img src="images/board-plugg.jpg" alt="">
-              <span class="row-name">Plugg</span>
-              <button type="button" class="row-save" aria-label="Save to Plugg">Save</button>
-            </div>
-              <p class="picker-label">All boards</p>
-            <div class="row" data-board="Amazing minecraft">
-              <img src="images/board-minecraft.jpg" alt="">
-              <span class="row-name">Amazing minecraft</span>
-              <button type="button" class="row-save" aria-label="Save to Amazing minecraft">Save</button>
-            </div>
-            <div class="row" data-board="Andys">
-              <img src="images/board-andys.jpg" alt="">
-              <span class="row-name">Andys</span>
-              <button type="button" class="row-save" aria-label="Save to Andys">Save</button>
-            </div>
-            <div class="row" data-board="Plugg">
-              <img src="images/board-plugg.jpg" alt="">
-              <span class="row-name">Plugg</span>
-              <button type="button" class="row-save" aria-label="Save to Plugg">Save</button>
-            </div>
+              <div class="row" data-board="Andys">
+                <img src="images/board-andys.jpg" alt="">
+                <span class="row-name">Andys</span>
+                <button type="button" class="row-save" aria-label="Save to Andys">Save</button>
+              </div>
+              <div class="row" data-board="Plugg">
+                <img src="images/board-plugg.jpg" alt="">
+                <span class="row-name">Plugg</span>
+                <button type="button" class="row-save" aria-label="Save to Plugg">Save</button>
+              </div>
+              <p class="picker-label all-label">All boards</p>
+              <div class="row" data-board="Amazing minecraft">
+                <img src="images/board-minecraft.jpg" alt="">
+                <span class="row-name">Amazing minecraft</span>
+                <button type="button" class="row-save" aria-label="Save to Amazing minecraft">Save</button>
+              </div>
+              <div class="row" data-board="Andys">
+                <img src="images/board-andys.jpg" alt="">
+                <span class="row-name">Andys</span>
+                <button type="button" class="row-save" aria-label="Save to Andys">Save</button>
+              </div>
+              <div class="row" data-board="Plugg">
+                <img src="images/board-plugg.jpg" alt="">
+                <span class="row-name">Plugg</span>
+                <button type="button" class="row-save" aria-label="Save to Plugg">Save</button>
+              </div>
               <p class="no-results" hidden>No boards found</p>
             </div>
-            <div class="create"><span aria-hidden="true">+</span> Create board</div>
+            <div class="picker-footer">
+              <div class="create" role="button" tabindex="0"><span aria-hidden="true">+</span> Create board</div>
+              <form class="create-form">
+                <input class="create-input" type="text" placeholder="Board name" maxlength="30" aria-label="Board name">
+                <button type="submit" class="create-btn" disabled>Create</button>
+              </form>
+            </div>
           </div>
         </div>
 
-        <p class="hint">Move the cursor onto the image card. Click the Board button to pick a board, or click Save.</p>
+        <p class="hint">Move the cursor onto the image card. Click the Board button to pick or create a board, or click Save. Click "Saved" to undo.</p>
       </section>
 
       <section id="terms">
@@ -93,6 +98,10 @@
           <dd>One line in the board picker window: a board's small image and its name.</dd>
           <dt>Row Save button</dt>
           <dd>Red "Save" button on the right side of a board row.</dd>
+          <dt>"Create board" row</dt>
+          <dd>Last line of the board picker window. Clicking it lets the user name and make a new board.</dd>
+          <dt>Database</dt>
+          <dd>Where saves are stored. In this build it is the browser's localStorage, so a save is still there after a reload.</dd>
           <dt>Opacity</dt>
           <dd>How visible something is: 0% is invisible, 100% is fully visible.</dd>
         </dl>
@@ -116,15 +125,22 @@
               <li>Hover ON</li>
               <li>Hover OFF</li>
               <li>Click ON (anywhere on the board row, including the Row Save button)</li>
+              <li>"Create board" Row Hover ON</li>
+              <li>"Create board" Row Hover OFF</li>
+              <li>"Create board" Row Click ON</li>
+              <li>Typing a board name</li>
+              <li>"Create" Button Click ON (or press Enter in the text field)</li>
             </ul>
           </li>
           <li><b>Save Button</b>
             <ul>
               <li>Image Card Hover ON (cursor moves onto the image card)</li>
               <li>Image Card Hover OFF (cursor moves off the image card)</li>
-              <li>Hover ON</li>
+              <li>Hover ON (button says "Save")</li>
+              <li>Hover ON (button says "Saved")</li>
               <li>Hover OFF</li>
-              <li>Click ON</li>
+              <li>Click ON (button says "Save")</li>
+              <li>Click OFF (button says "Saved")</li>
             </ul>
           </li>
         </ul>
@@ -144,7 +160,7 @@
                   </li>
                   <li>Board button fades in at the top-left corner of the image card
                     <ul>
-                      <li>Shows the board name ("Andys") and a down arrow, in white text</li>
+                      <li>Shows a board name ("Andys" the first time) and a down arrow, in white text</li>
                       <li>Opacity changes from 0% to 100% over 0.15 seconds</li>
                     </ul>
                   </li>
@@ -157,6 +173,7 @@
                       <li>Opacity changes from 100% to 0% over 0.15 seconds</li>
                     </ul>
                   </li>
+                  <li>If the board picker window is open, they stay at 100% opacity until it closes</li>
                 </ul>
               </li>
               <li>Hover ON
@@ -178,6 +195,7 @@
                       <li>Opacity changes from 100% to 0% over 0.15 seconds</li>
                     </ul>
                   </li>
+                  <li>If the board picker window is open, the rounded background stays at 100% opacity until it closes</li>
                 </ul>
               </li>
               <li>Click ON
@@ -191,13 +209,12 @@
                   <li>Board picker window shows, from top to bottom:
                     <ul>
                       <li>Title "Save"</li>
-                      <li>Search bar, with a blinking text cursor in it</li>
+                      <li>Search bar (empty), with a blinking text cursor in it</li>
                       <li>"Top choices" list: Andys, Plugg</li>
-                      <li>"All boards" list: Amazing minecraft, Andys, Plugg (scrolls up and down)</li>
+                      <li>"All boards" list: any boards the user created, then Amazing minecraft, Andys, Plugg (scrolls up and down)</li>
                       <li>"Create board" row at the bottom</li>
                     </ul>
                   </li>
-                  <li>Board button's rounded background and the dark gradient layer stay at 100% opacity while the board picker window is open</li>
                 </ul>
               </li>
               <li>Click OFF (click the Board button again, click outside the board picker window, or press the Esc key)
@@ -247,14 +264,74 @@
               </li>
               <li>Click ON (anywhere on the board row, including the Row Save button)
                 <ul>
-                  <li>Image card is saved to that board</li>
-                  <li>Database updated with the image card added to that board (in this build, a JavaScript variable stores the board name)</li>
+                  <li>Image card is saved to that board (if it was saved to a different board, it moves to this one)</li>
+                  <li>Database updated (in this build, the browser's localStorage, so the change is still there after the page is reloaded)</li>
+                  <li>That board becomes the default board for the next save</li>
                   <li>Board picker window slides back up and fades out
                     <ul>
                       <li>Moves up 8px while opacity changes from 100% to 0% over 0.15 seconds</li>
                     </ul>
                   </li>
-                  <li>Board button text changes to the chosen board's name</li>
+                  <li>Board button text changes to that board's name</li>
+                  <li>Save button background changes from RED (#E60023) to BLACK (#111111) over 0.15 seconds</li>
+                  <li>Save button text changes from "Save" to "Saved"</li>
+                  <li>Down arrow on the Board button fades out
+                    <ul>
+                      <li>Opacity changes from 100% to 0% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                  <li>Underline fades in under the board name
+                    <ul>
+                      <li>Opacity changes from 0% to 100% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>"Create board" Row Hover ON
+                <ul>
+                  <li>Cursor changes from arrow to pointing finger</li>
+                  <li>Row background changes from white to light gray (#E5E5E0) over 0.1 seconds</li>
+                </ul>
+              </li>
+              <li>"Create board" Row Hover OFF
+                <ul>
+                  <li>Cursor changes from pointing finger back to arrow</li>
+                  <li>Row background changes from light gray back to white over 0.1 seconds</li>
+                </ul>
+              </li>
+              <li>"Create board" Row Click ON
+                <ul>
+                  <li>"Create board" row is replaced by a form (instantly, 0 seconds)
+                    <ul>
+                      <li>Text field with the gray hint "Board name" and a blinking text cursor in it</li>
+                      <li>"Create" button on the right: gray (#E9E9E9) with gray text, and clicking it does nothing</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Typing a board name
+                <ul>
+                  <li>"Create" button background changes from gray to red (#E60023) and its text from gray to white over 0.1 seconds</li>
+                  <li>If the text field is emptied again, the "Create" button changes back to gray over 0.1 seconds</li>
+                </ul>
+              </li>
+              <li>"Create" Button Click ON (or press Enter in the text field)
+                <ul>
+                  <li>New board added to the database</li>
+                  <li>Image card is saved to the new board</li>
+                  <li>The new board becomes the default board for the next save</li>
+                  <li>New board row is added at the top of the "All boards" list (instantly, 0 seconds)
+                    <ul>
+                      <li>Shows a gray square with the board's first letter, and the board name</li>
+                    </ul>
+                  </li>
+                  <li>If a board with that name already exists, no new row is added; the image card is saved to the existing board</li>
+                  <li>Board picker window slides back up and fades out
+                    <ul>
+                      <li>Moves up 8px while opacity changes from 100% to 0% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                  <li>Board button text changes to that board's name</li>
                   <li>Save button background changes from RED (#E60023) to BLACK (#111111) over 0.15 seconds</li>
                   <li>Save button text changes from "Save" to "Saved"</li>
                   <li>Down arrow on the Board button fades out
@@ -292,22 +369,29 @@
                   </li>
                 </ul>
               </li>
-              <li>Hover ON
+              <li>Hover ON (button says "Save")
                 <ul>
                   <li>Cursor changes from arrow to pointing finger</li>
                   <li>Background changes from red (#E60023) to darker red (#CC001F) over 0.15 seconds</li>
                 </ul>
               </li>
+              <li>Hover ON (button says "Saved")
+                <ul>
+                  <li>Cursor changes from arrow to pointing finger</li>
+                  <li>Background changes from black (#111111) to dark gray (#333333) over 0.15 seconds</li>
+                </ul>
+              </li>
               <li>Hover OFF
                 <ul>
                   <li>Cursor changes from pointing finger back to arrow</li>
-                  <li>Background changes from darker red (#CC001F) back to red (#E60023) over 0.15 seconds</li>
+                  <li>Background changes back to red (#E60023), or black (#111111) if it says "Saved", over 0.15 seconds</li>
                 </ul>
               </li>
-              <li>Click ON
+              <li>Click ON (button says "Save")
                 <ul>
-                  <li>Image card is saved to the board shown on the Board button (Andys)</li>
-                  <li>Database updated with the image card added to that board (in this build, a JavaScript variable stores the board name)</li>
+                  <li>Image card is saved to the board shown on the Board button</li>
+                  <li>Database updated (in this build, the browser's localStorage, so the change is still there after the page is reloaded)</li>
+                  <li>If the board picker window is open, it slides back up and fades out (moves up 8px while opacity changes from 100% to 0% over 0.15 seconds)</li>
                   <li>Save button background changes from RED (#E60023) to BLACK (#111111) over 0.15 seconds</li>
                   <li>Save button text changes from "Save" to "Saved"</li>
                   <li>Down arrow on the Board button fades out
@@ -320,6 +404,25 @@
                       <li>Opacity changes from 0% to 100% over 0.15 seconds</li>
                     </ul>
                   </li>
+                </ul>
+              </li>
+              <li>Click OFF (button says "Saved")
+                <ul>
+                  <li>Image card is removed from the board</li>
+                  <li>Database updated (in this build, the browser's localStorage, so the change is still there after the page is reloaded)</li>
+                  <li>Save button background changes from BLACK (#111111) to RED (#E60023) over 0.15 seconds</li>
+                  <li>Save button text changes from "Saved" to "Save"</li>
+                  <li>Down arrow on the Board button fades in
+                    <ul>
+                      <li>Opacity changes from 0% to 100% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                  <li>Underline under the board name fades out
+                    <ul>
+                      <li>Opacity changes from 100% to 0% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                  <li>Board button keeps the same board name, so the next Click ON saves to that board again</li>
                 </ul>
               </li>
             </ul>
@@ -341,7 +444,7 @@
                   </li>
                   <li>Board button fades in at the top-left corner of the image card
                     <ul>
-                      <li>Shows the board name ("Andys") and a down arrow, in white text</li>
+                      <li>Shows a board name ("Andys" the first time) and a down arrow, in white text</li>
                       <li>Opacity changes from 0% to 100% over 0.15 seconds</li>
                     </ul>
                   </li>
@@ -354,6 +457,7 @@
                       <li>Opacity changes from 100% to 0% over 0.15 seconds</li>
                     </ul>
                   </li>
+                  <li>If the board picker window is open, they stay at 100% opacity until it closes</li>
                 </ul>
               </li>
               <li>Hover ON
@@ -375,6 +479,7 @@
                       <li>Opacity changes from 100% to 0% over 0.15 seconds</li>
                     </ul>
                   </li>
+                  <li>If the board picker window is open, the rounded background stays at 100% opacity until it closes</li>
                 </ul>
               </li>
               <li>Click ON
@@ -388,13 +493,12 @@
                   <li>Board picker window shows, from top to bottom:
                     <ul>
                       <li>Title "Save"</li>
-                      <li>Search bar, with a blinking text cursor in it</li>
+                      <li>Search bar (empty), with a blinking text cursor in it</li>
                       <li>"Top choices" list: Andys, Plugg</li>
-                      <li>"All boards" list: Amazing minecraft, Andys, Plugg (scrolls up and down)</li>
+                      <li>"All boards" list: any boards the user created, then Amazing minecraft, Andys, Plugg (scrolls up and down)</li>
                       <li>"Create board" row at the bottom</li>
                     </ul>
                   </li>
-                  <li>Board button's rounded background and the dark gradient layer stay at 100% opacity while the board picker window is open</li>
                 </ul>
               </li>
               <li>Click OFF (click the Board button again, click outside the board picker window, or press the Esc key)
@@ -449,7 +553,63 @@
                       <li>Moves up 8px while opacity changes from 100% to 0% over 0.15 seconds</li>
                     </ul>
                   </li>
-                  <li>Board button text changes to the chosen board's name</li>
+                  <li>Board button text changes to that board's name</li>
+                  <li>Save button background changes from RED (#E60023) to BLACK (#111111) over 0.15 seconds</li>
+                  <li>Save button text changes from "Save" to "Saved"</li>
+                  <li>Down arrow on the Board button fades out
+                    <ul>
+                      <li>Opacity changes from 100% to 0% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                  <li>Underline fades in under the board name
+                    <ul>
+                      <li>Opacity changes from 0% to 100% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>"Create board" Row Hover ON
+                <ul>
+                  <li>Cursor changes from arrow to pointing finger</li>
+                  <li>Row background changes from white to light gray (#E5E5E0) over 0.1 seconds</li>
+                </ul>
+              </li>
+              <li>"Create board" Row Hover OFF
+                <ul>
+                  <li>Cursor changes from pointing finger back to arrow</li>
+                  <li>Row background changes from light gray back to white over 0.1 seconds</li>
+                </ul>
+              </li>
+              <li>"Create board" Row Click ON
+                <ul>
+                  <li>"Create board" row is replaced by a form (instantly, 0 seconds)
+                    <ul>
+                      <li>Text field with the gray hint "Board name" and a blinking text cursor in it</li>
+                      <li>"Create" button on the right: gray (#E9E9E9) with gray text, and clicking it does nothing</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Typing a board name
+                <ul>
+                  <li>"Create" button background changes from gray to red (#E60023) and its text from gray to white over 0.1 seconds</li>
+                  <li>If the text field is emptied again, the "Create" button changes back to gray over 0.1 seconds</li>
+                </ul>
+              </li>
+              <li>"Create" Button Click ON (or press Enter in the text field)
+                <ul>
+                  <li>New board row is added at the top of the "All boards" list (instantly, 0 seconds)
+                    <ul>
+                      <li>Shows a gray square with the board's first letter, and the board name</li>
+                    </ul>
+                  </li>
+                  <li>If a board with that name already exists, no new row is added; the image card is saved to the existing board</li>
+                  <li>Board picker window slides back up and fades out
+                    <ul>
+                      <li>Moves up 8px while opacity changes from 100% to 0% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                  <li>Board button text changes to that board's name</li>
                   <li>Save button background changes from RED (#E60023) to BLACK (#111111) over 0.15 seconds</li>
                   <li>Save button text changes from "Save" to "Saved"</li>
                   <li>Down arrow on the Board button fades out
@@ -487,20 +647,27 @@
                   </li>
                 </ul>
               </li>
-              <li>Hover ON
+              <li>Hover ON (button says "Save")
                 <ul>
                   <li>Cursor changes from arrow to pointing finger</li>
                   <li>Background changes from red (#E60023) to darker red (#CC001F) over 0.15 seconds</li>
                 </ul>
               </li>
+              <li>Hover ON (button says "Saved")
+                <ul>
+                  <li>Cursor changes from arrow to pointing finger</li>
+                  <li>Background changes from black (#111111) to dark gray (#333333) over 0.15 seconds</li>
+                </ul>
+              </li>
               <li>Hover OFF
                 <ul>
                   <li>Cursor changes from pointing finger back to arrow</li>
-                  <li>Background changes from darker red (#CC001F) back to red (#E60023) over 0.15 seconds</li>
+                  <li>Background changes back to red (#E60023), or black (#111111) if it says "Saved", over 0.15 seconds</li>
                 </ul>
               </li>
-              <li>Click ON
+              <li>Click ON (button says "Save")
                 <ul>
+                  <li>If the board picker window is open, it slides back up and fades out (moves up 8px while opacity changes from 100% to 0% over 0.15 seconds)</li>
                   <li>Save button background changes from RED (#E60023) to BLACK (#111111) over 0.15 seconds</li>
                   <li>Save button text changes from "Save" to "Saved"</li>
                   <li>Down arrow on the Board button fades out
@@ -515,6 +682,23 @@
                   </li>
                 </ul>
               </li>
+              <li>Click OFF (button says "Saved")
+                <ul>
+                  <li>Save button background changes from BLACK (#111111) to RED (#E60023) over 0.15 seconds</li>
+                  <li>Save button text changes from "Saved" to "Save"</li>
+                  <li>Down arrow on the Board button fades in
+                    <ul>
+                      <li>Opacity changes from 0% to 100% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                  <li>Underline under the board name fades out
+                    <ul>
+                      <li>Opacity changes from 100% to 0% over 0.15 seconds</li>
+                    </ul>
+                  </li>
+                  <li>Board button keeps the same board name, so the next Click ON saves to that board again</li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -524,22 +708,32 @@
         <ul>
           <li><b>Search Mode</b> (user types in the search bar)
             <ul>
-              <li>Board rows whose names do not match the typed text are hidden (instantly, 0 seconds)</li>
+              <li>Board rows whose names do not contain the typed text are hidden (instantly, 0 seconds)</li>
               <li>"Top choices" and "All boards" labels are hidden while there is text in the search bar</li>
-              <li>If no board names match, the text "No boards found" shows instead</li>
-              <li>Search bar is emptied every time the board picker window opens</li>
+              <li>If no board names match, the text "No boards found" shows instead (instantly, 0 seconds)</li>
+              <li>Search bar is emptied, and the "Create board" form goes back to the "Create board" row, every time the board picker window opens</li>
             </ul>
           </li>
-          <li><b>Saved Mode</b> (after a Save button or board row Click ON)
+          <li><b>Saved Mode</b> (after a Board Row, "Create" or Save button Click ON)
             <ul>
-              <li>Save button stays BLACK with "Saved", even on Hover ON; cursor stays an arrow</li>
-              <li>Board button stays underlined with no down arrow; Hover ON no longer shows the rounded background, and Click ON no longer opens the board picker window</li>
-              <li>Saved Mode lasts until the page is reloaded, which resets the image card to "Save" and "Andys"</li>
+              <li>Save button stays BLACK with "Saved" and the board name stays underlined with no down arrow</li>
+              <li>Board button still works: Click ON opens the board picker window, and choosing a different board moves the save to that board</li>
+              <li>Saved Mode ends only when the user clicks "Saved" (Save Button Click OFF)</li>
+            </ul>
+          </li>
+          <li><b>Page Reload</b>
+            <ul>
+              <li>The page reads the database (localStorage) and shows the last state right away, with no animation: "Save" or "Saved", the last board name, and any boards the user created</li>
             </ul>
           </li>
           <li><b>Touch Mode</b> (phones and tablets, which have no hover)
             <ul>
               <li>Dark gradient layer, Board button, Save button and every Row Save button stay at 100% opacity</li>
+            </ul>
+          </li>
+          <li><b>Reduced Motion Mode</b> (the user's device is set to reduce motion)
+            <ul>
+              <li>Every change happens instantly (0 seconds) instead of fading or sliding</li>
             </ul>
           </li>
         </ul>

@@ -33,6 +33,9 @@ A working recreation of the image card's Board button, board picker window and S
 - **Board row:** hover turns the row light gray and fades in a Row Save button; click saves to that board.
 - **Save button:** hover turns it darker red; click turns it black and changes the text to "Saved".
 - **Search:** typing in the board picker's search bar filters the boards.
+- **Create board:** name a new board in the picker; the image card is saved to it.
+- **Undo:** click "Saved" to remove the save.
+- **Database:** saves and new boards are kept in localStorage, so they are still there after a reload.
 
 Live: [idm241-qbk23.vercel.app/idm241_qbk23/beta/build/build.html](https://idm241-qbk23.vercel.app/idm241_qbk23/beta/build/build.html)
 
@@ -55,7 +58,7 @@ idm241_qbk23/
     └── build/
         ├── build.html    Working Beta Build page
         ├── style.css     Styles, hover/click states and timing
-        ├── script.js     Opens/closes the picker, saves, search
+        ├── script.js     Picker, saving, undo, search, create board, localStorage
         └── images/       Image card photo and board thumbnails
 ```
 
