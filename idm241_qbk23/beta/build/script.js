@@ -1,6 +1,8 @@
 // Beta Build: Board button, board picker window (board rows + Create board) and Save button.
-// CSS does every fade and slide. This script switches classes and text, and keeps
-// the "database" in the browser's localStorage so a save is still there after a reload.
+// Only the cursor changes instantly. CSS transitions every other change; this script
+// switches classes, and keeps the "database" in the browser's localStorage.
+
+const NORMAL = 150; // ms, matches --normal in style.css
 
 const stage = document.querySelector(".stage");
 const boardBtn = document.querySelector(".board-btn");
@@ -22,8 +24,7 @@ const DEFAULT_STATE = { savedTo: null, lastBoard: "Andys", newBoards: [] };
 
 function loadState() {
   try {
-    const stored = JSON.parse(localStorage.getItem(KEY));
-    return Object.assign({}, DEFAULT_STATE, stored);
+    return Object.assign({}, DEFAULT_STATE, JSON.parse(localStorage.getItem(KEY)));
   } catch (error) {
     return Object.assign({}, DEFAULT_STATE);
   }
@@ -49,7 +50,7 @@ function findBoard(name) {
   return row ? row.dataset.board : null;
 }
 
-function addBoardRow(name) {
+function addBoardRow(name, grow) {
   const row = document.createElement("div");
   row.className = "row";
   row.dataset.board = name;
@@ -60,73 +61,119 @@ function addBoardRow(name) {
   row.querySelector(".row-thumb").textContent = name.charAt(0).toUpperCase();
   row.querySelector(".row-name").textContent = name;
   row.querySelector(".row-save").setAttribute("aria-label", "Save to " + name);
-  allLabel.after(row);                       // new boards go to the top of "All boards"
   row.addEventListener("click", onRowClick);
+
+  if (grow) {
+    // Start at height 0 and opacity 0%, then grow in over 0.2 seconds
+    row.classList.add("is-new", "is-growing");
+    allLabel.after(row);
+    row.getBoundingClientRect();
+    row.classList.remove("is-new");
+    setTimeout(() => row.classList.remove("is-growing"), 250);
+  } else {
+    allLabel.after(row);
+  }
+}
+
+// ===== Board name: fade out, resize the button, fade the new name in =====
+function setBoardName(name, animate) {
+  if (boardName.textContent === name) return;
+
+  if (!animate) {
+    boardName.textContent = name;
+    return;
+  }
+
+  boardName.classList.add("is-fading");          // old name: opacity 100% -> 0%
+  setTimeout(() => {
+    const startWidth = boardBtn.offsetWidth;
+    boardName.textContent = name;
+    boardBtn.style.width = "auto";
+    const endWidth = boardBtn.offsetWidth;
+    boardBtn.style.width = startWidth + "px";
+    boardBtn.getBoundingClientRect();
+    boardBtn.style.width = endWidth + "px";      // width grows/shrinks over 0.15s
+    boardName.classList.remove("is-fading");     // new name: opacity 0% -> 100%
+    setTimeout(() => (boardBtn.style.width = ""), NORMAL + 30);
+  }, NORMAL);
 }
 
 // ===== Show the current state =====
-function render() {
+function render(animate) {
   const saved = state.savedTo !== null;
-  stage.classList.toggle("is-saved", saved);
-  boardName.textContent = saved ? state.savedTo : state.lastBoard;
-  saveBtn.textContent = saved ? "Saved" : "Save";
+  stage.classList.toggle("is-saved", saved);     // Save/Saved cross-fade, colors, arrow, underline
+  setBoardName(saved ? state.savedTo : state.lastBoard, animate);
   saveBtn.setAttribute("aria-pressed", String(saved));
+  saveBtn.setAttribute("aria-label", saved ? "Saved" : "Save");
 }
 
 // ===== Saving =====
 function saveTo(board) {
-  state.savedTo = board;                     // hidden: image card added to the board
-  state.lastBoard = board;                   // hidden: default board for the next save
-  saveState();                               // hidden: database updated
-  render();
+  state.savedTo = board;                         // hidden: image card added to the board
+  state.lastBoard = board;                       // hidden: default board for the next save
+  saveState();                                   // hidden: database updated
+  render(true);
 }
 
 function unsave() {
-  state.savedTo = null;                      // hidden: image card removed from the board
-  saveState();                               // hidden: database updated
-  render();
+  state.savedTo = null;                          // hidden: image card removed from the board
+  saveState();                                   // hidden: database updated
+  render(true);
 }
 
 // ===== Board picker window =====
+function isOpen() {
+  return stage.classList.contains("is-open");
+}
+
 function openPicker() {
   stage.classList.add("is-open");
   boardBtn.setAttribute("aria-expanded", "true");
-  search.value = "";
-  filterRows("");
-  closeCreateForm();
-  setTimeout(() => search.focus(), 50);      // text cursor blinks in the search bar
+  setTimeout(() => search.focus({ preventScroll: true }), 50);
 }
 
 function closePicker() {
+  if (!isOpen()) return;
   stage.classList.remove("is-open");
   boardBtn.setAttribute("aria-expanded", "false");
+  if (picker.contains(document.activeElement)) document.activeElement.blur();
+  // Once it has finished sliding up (out of view), reset it for next time
+  setTimeout(resetPicker, NORMAL + 30);
 }
 
-// SEARCH MODE: typing hides board rows whose names don't match
+function resetPicker() {
+  if (isOpen()) return;
+  picker.classList.add("no-anim");
+  search.value = "";
+  filterRows("");
+  stage.classList.remove("is-creating");
+  createInput.value = "";
+  updateCreateBtn();
+  list.scrollTop = 0;
+  picker.getBoundingClientRect();
+  picker.classList.remove("no-anim");
+}
+
+// SEARCH MODE: board rows whose names don't match fade out and collapse
 function filterRows(text) {
   const query = text.trim().toLowerCase();
   let shown = 0;
   allRows().forEach((row) => {
     const match = row.dataset.board.toLowerCase().includes(query);
-    row.hidden = !match;
+    row.classList.toggle("is-collapsed", !match);
     if (match) shown++;
   });
-  noResults.hidden = shown > 0;
+  noResults.classList.toggle("is-shown", shown === 0);
   document.querySelectorAll(".picker-label").forEach((label) => {
-    label.hidden = query !== "";
+    label.classList.toggle("is-collapsed", query !== "");
   });
 }
 
 // ===== Create board =====
 function openCreateForm() {
-  stage.classList.add("is-creating");
-  createInput.value = "";
+  stage.classList.add("is-creating");          // row fades out, form fades in (0.1s)
   updateCreateBtn();
-  createInput.focus();
-}
-
-function closeCreateForm() {
-  stage.classList.remove("is-creating");
+  setTimeout(() => createInput.focus({ preventScroll: true }), 50);
 }
 
 function updateCreateBtn() {
@@ -139,8 +186,8 @@ function createBoard() {
   const existing = findBoard(name);
   const board = existing || name;
   if (!existing) {
-    addBoardRow(board);
-    state.newBoards.push(board);             // hidden: new board added to the database
+    addBoardRow(board, true);
+    state.newBoards.push(board);                 // hidden: new board added to the database
   }
   closePicker();
   saveTo(board);
@@ -153,13 +200,13 @@ function onRowClick(event) {
   saveTo(event.currentTarget.dataset.board);
 }
 
-// Board button: Click ON opens the picker, Click OFF (clicking it again) closes it
+// Board button: Click ON opens the picker, clicking it again closes it
 boardBtn.addEventListener("click", (event) => {
   event.stopPropagation();
-  stage.classList.contains("is-open") ? closePicker() : openPicker();
+  isOpen() ? closePicker() : openPicker();
 });
 
-// Save button: Click ON saves to the board shown, Click OFF (on "Saved") removes the save
+// Save button: Click ON saves to the board shown; Click OFF (on "Saved") removes the save
 saveBtn.addEventListener("click", () => {
   closePicker();
   state.savedTo === null ? saveTo(boardName.textContent) : unsave();
@@ -189,20 +236,15 @@ search.addEventListener("input", () => filterRows(search.value));
 picker.addEventListener("click", (event) => event.stopPropagation());
 
 // Click OFF: click outside the board picker window, or press Esc
-document.addEventListener("click", () => {
-  if (stage.classList.contains("is-open")) closePicker();
-});
-
+document.addEventListener("click", closePicker);
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && stage.classList.contains("is-open")) {
-    closePicker();
-  }
+  if (event.key === "Escape") closePicker();
 });
 
-// ===== Page load: show what the database holds, with no animation =====
-state.newBoards.forEach((board) => {
-  if (!findBoard(board)) addBoardRow(board);
-});
+// ===== Page load: the page starts out showing what the database holds =====
 stage.classList.add("no-anim");
-render();
+state.newBoards.forEach((board) => {
+  if (!findBoard(board)) addBoardRow(board, false);
+});
+render(false);
 requestAnimationFrame(() => requestAnimationFrame(() => stage.classList.remove("no-anim")));
