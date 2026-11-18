@@ -430,6 +430,13 @@ a:focus-visible {
   border-color: var(--focus);
 }
 
+/* Turn off the browser's own "x" clear button (it would pop in instantly) */
+.field input[type="search"]::-webkit-search-cancel-button,
+.field input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .field-hint {
   position: absolute;
   left: calc(1rem + 2px);

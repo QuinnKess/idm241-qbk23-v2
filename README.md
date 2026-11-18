@@ -39,6 +39,12 @@ A working recreation of the image card's Board button, board picker window and S
 
 Live: [idm241-qbk23.vercel.app/idm241_qbk23/beta/build/build.html](https://idm241-qbk23.vercel.app/idm241_qbk23/beta/build/build.html)
 
+## Final: Save to a Board, with a Saved Message
+
+Write-up of the Final "complex" microinteractions: the **Board button**, **Board Row** (with search and "Create board"), **Save button** and a new **Saved message** that slides up after a save, with an "Undo" button and a 4-second timer bar that pauses on hover.
+
+Live: [idm241-qbk23.vercel.app/idm241_qbk23/final/](https://idm241-qbk23.vercel.app/idm241_qbk23/final/)
+
 ## Files
 
 ```
@@ -51,15 +57,19 @@ idm241_qbk23/
 │       ├── style.css     Styles and hover/click states
 │       └── images/
 │           └── pin.jpg   Pin image
-└── beta/
-    ├── index.html        Beta write-up with screenshots
-    ├── style.css         Beta page styles
-    ├── images/           Screenshots and GIF of the board picker
-    └── build/
-        ├── build.html    Working Beta Build page
-        ├── style.css     Styles, hover/click states and timing
-        ├── script.js     Picker, saving, undo, search, create board, localStorage
-        └── images/       Image card photo and board thumbnails
+├── beta/
+│   ├── index.html        Beta write-up with screenshots
+│   ├── style.css         Beta page styles
+│   ├── images/           Screenshots and GIF of the board picker
+│   └── build/
+│       ├── build.html    Working Beta Build page
+│       ├── style.css     Styles, hover/click states and timing
+│       ├── script.js     Picker, saving, undo, search, create board, localStorage
+│       └── images/       Image card photo and board thumbnails
+└── final/
+    ├── index.html        Final write-up with screenshots
+    ├── style.css         Final page styles
+    └── images/           Screenshots and GIF of the Final interaction
 ```
 
 ## View it
