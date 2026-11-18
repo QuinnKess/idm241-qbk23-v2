@@ -45,6 +45,12 @@ Write-up of the Final "complex" microinteractions: the **Board button**, **Board
 
 Live: [idm241-qbk23.vercel.app/idm241_qbk23/final/](https://idm241-qbk23.vercel.app/idm241_qbk23/final/)
 
+## Final Build: Save to a Board, with a Saved Message
+
+The working Final: the Beta Build plus a **Saved message** that slides up after each save, with an "Undo" button and a 4-second timer bar that pauses on hover. Includes a link to pinterest.com for comparison.
+
+Live: [idm241-qbk23.vercel.app/idm241_qbk23/final/build/build.html](https://idm241-qbk23.vercel.app/idm241_qbk23/final/build/build.html)
+
 ## Files
 
 ```
@@ -69,7 +75,12 @@ idm241_qbk23/
 └── final/
     ├── index.html        Final write-up with screenshots
     ├── style.css         Final page styles
-    └── images/           Screenshots and GIF of the Final interaction
+    ├── images/           Screenshots and GIF of the Final interaction
+    └── build/
+        ├── build.html    Working Final Build page
+        ├── style.css     Styles, hover/click states and timing
+        ├── script.js     Picker, saving, Saved message timer, undo, localStorage
+        └── images/       Image card photo and board thumbnails
 ```
 
 ## View it
